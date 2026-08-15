@@ -1,149 +1,182 @@
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Special+Elite&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<!DOCTYPE html>
+<html lang="en">
 
-<div id="dogcourt-root">
-  <div class="dc-top-bar">
-    <button class="dc-top-btn" id="dc-btn-archive">📁 Past Cases (<span id="dc-archive-count">0</span>)</button>
-    <button class="dc-top-btn" id="dc-btn-random">🎲 Random Case</button>
-    <button class="dc-top-btn" id="dc-btn-settings">⚙️ Settings</button>
-  </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Dog Court - A Mock Courtroom for Household Canine 'Crimes'">
+  <meta name="author" content="Shivam Dattatray Pawar">
+  <meta name="keywords"
+    content="Dog Court, Canine Justice, AI Application, Weekend Challenge, Dog Days Edition, Shivam Dattatray Pawar">
+  <title>Dog Court 🐕⚖️ - A Mock Courtroom for Household Canine "Crimes"</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=Special+Elite&family=PT+Serif:ital,wght@0,400;0,700;1,400&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
 
-  <div class="dc-header">
-    <p class="dc-eyebrow">The Honorable Court of Domestic Grievances</p>
-    <h1 class="dc-title">Dog Court 🐕⚖️</h1>
-    <p class="dc-sub">Justice, served with a chew toy. Pick a crime, file the case, hear the deadpan legal drama play out live.</p>
-  </div>
+<body>
+  <div id="dogcourt-root">
+    <div class="dc-top-bar">
+      <button class="dc-top-btn" id="dc-btn-archive">📁 Past Cases (<span id="dc-archive-count">0</span>)</button>
+      <button class="dc-top-btn" id="dc-btn-random">🎲 Random Case</button>
+      <button class="dc-top-btn" id="dc-btn-settings">⚙️ Settings</button>
+    </div>
 
-  <div class="dc-card">
+    <div class="dc-header">
+      <p class="dc-eyebrow">The Honorable Court of Domestic Grievances</p>
+      <h1 class="dc-title">Dog Court 🐕⚖️</h1>
+      <p class="dc-sub">Justice, served with a chew toy. Pick a crime, file the case, hear the deadpan legal drama play
+        out live.</p>
+    </div>
 
-    <div class="dc-mugshot">
-      <div class="dc-mugshot-art" id="dc-mugshot-container">
-        <!-- SVG rendered dynamically by app.js -->
-        <div class="dc-mugshot-board" id="dc-mugshot-board">DC-2026</div>
-      </div>
-      <div class="dc-mugshot-lines">
-        <div class="dc-mug-name" id="dc-mug-name">DEFENDANT: UNKNOWN</div>
-        <div class="dc-mug-meta" id="dc-mug-meta">STATUS: AWAITING CHARGES<br/>PRIOR OFFENSES: SUSPICIOUSLY CLEAN RECORD</div>
-        
-        <!-- Mugshot Customizer Toolbar -->
-        <div class="dc-avatar-customizer">
-          <div class="dc-cust-group">
-            <span class="dc-cust-label">Coat:</span>
-            <button class="dc-cust-opt active" data-type="coat" data-val="golden" title="Golden">🦮</button>
-            <button class="dc-cust-opt" data-type="coat" data-val="black" title="Black">🐕‍🦺</button>
-            <button class="dc-cust-opt" data-type="coat" data-val="husky" title="Grey/Husky">🐺</button>
-            <button class="dc-cust-opt" data-type="coat" data-val="dalmatian" title="Spotted">🐾</button>
-          </div>
-          <div class="dc-cust-group">
-            <span class="dc-cust-label">Accessory:</span>
-            <button class="dc-cust-opt active" data-type="acc" data-val="none" title="None">❌</button>
-            <button class="dc-cust-opt" data-type="acc" data-val="wig" title="Judge Wig">👨‍⚖️</button>
-            <button class="dc-cust-opt" data-type="acc" data-val="bowtie" title="Formal Bowtie">🎀</button>
-            <button class="dc-cust-opt" data-type="acc" data-val="hat" title="Detective Hat">🕵️</button>
+    <div class="dc-card">
+
+      <div class="dc-mugshot">
+        <div class="dc-mugshot-art" id="dc-mugshot-container">
+          <!-- SVG rendered dynamically by app.js -->
+          <div class="dc-mugshot-board" id="dc-mugshot-board">DC-2026</div>
+        </div>
+        <div class="dc-mugshot-lines">
+          <div class="dc-mug-name" id="dc-mug-name">DEFENDANT: UNKNOWN</div>
+          <div class="dc-mug-meta" id="dc-mug-meta">STATUS: AWAITING CHARGES<br />PRIOR OFFENSES: SUSPICIOUSLY CLEAN
+            RECORD</div>
+
+          <!-- Mugshot Customizer Toolbar -->
+          <div class="dc-avatar-customizer">
+            <div class="dc-cust-group">
+              <span class="dc-cust-label">Coat:</span>
+              <button class="dc-cust-opt active" data-type="coat" data-val="golden" title="Golden">🦮</button>
+              <button class="dc-cust-opt" data-type="coat" data-val="black" title="Black">🐕‍🦺</button>
+              <button class="dc-cust-opt" data-type="coat" data-val="husky" title="Grey/Husky">🐺</button>
+              <button class="dc-cust-opt" data-type="coat" data-val="dalmatian" title="Spotted">🐾</button>
+            </div>
+            <div class="dc-cust-group">
+              <span class="dc-cust-label">Accessory:</span>
+              <button class="dc-cust-opt active" data-type="acc" data-val="none" title="None">❌</button>
+              <button class="dc-cust-opt" data-type="acc" data-val="wig" title="Judge Wig">👨‍⚖️</button>
+              <button class="dc-cust-opt" data-type="acc" data-val="bowtie" title="Formal Bowtie">🎀</button>
+              <button class="dc-cust-opt" data-type="acc" data-val="hat" title="Detective Hat">🕵️</button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div class="dc-field-row">
+      <div class="dc-field-row">
+        <div class="dc-field">
+          <label class="dc-label">Defendant's Name</label>
+          <input class="dc-input" id="dc-dogname" placeholder="e.g. Biscuit" maxlength="40" />
+        </div>
+        <div class="dc-field">
+          <label class="dc-label">Breed (optional)</label>
+          <input class="dc-input" id="dc-breed" placeholder="e.g. Suspiciously innocent Labrador" maxlength="60" />
+        </div>
+      </div>
+
+      <div class="dc-crime-header-row">
+        <label class="dc-label">Pick a Crime (or write your own below)</label>
+      </div>
+      <div class="dc-chip-row" id="dc-chip-row">
+        <button class="dc-chip"
+          data-crime="Ate an entire left shoe while owner was on a work call, left the right shoe completely untouched">👟
+          Shoe theft</button>
+        <button class="dc-chip" data-crime="Body-slammed the coffee table exactly as the Zoom call went live">💥 Table
+          tackle</button>
+        <button class="dc-chip"
+          data-crime="Stole a rotisserie chicken off the counter in under four seconds, evidence: one greasy paper bag">🍗
+          Chicken heist</button>
+        <button class="dc-chip"
+          data-crime="Barked at the vacuum cleaner for eleven straight minutes, waking a sleeping baby">😤 Vacuum
+          assault</button>
+        <button class="dc-chip"
+          data-crime="Dug a hole in the newly planted flower bed and buried a single sock in it">🕳️ Sock
+          burial</button>
+        <button class="dc-chip" data-crime="Escaped the yard through a gap no human believed a dog could fit through">🏃
+          Great escape</button>
+      </div>
+
       <div class="dc-field">
-        <label class="dc-label">Defendant's Name</label>
-        <input class="dc-input" id="dc-dogname" placeholder="e.g. Biscuit" maxlength="40" />
+        <label class="dc-label">Alleged Crime</label>
+        <textarea class="dc-textarea" id="dc-crime" placeholder="Describe the crime, or tap a chip above"></textarea>
       </div>
-      <div class="dc-field">
-        <label class="dc-label">Breed (optional)</label>
-        <input class="dc-input" id="dc-breed" placeholder="e.g. Suspiciously innocent Labrador" maxlength="60" />
+
+      <button class="dc-file-btn" id="dc-file-btn">
+        <span>⚖️</span> File the Case
+      </button>
+
+      <div class="dc-loading" id="dc-loading">
+        <div class="dc-paws"><span></span><span></span><span></span><span></span></div>
+        <span id="dc-loading-text">Bailiff is summoning the court...</span>
       </div>
-    </div>
+      <p class="dc-status" id="dc-status"></p>
 
-    <div class="dc-crime-header-row">
-      <label class="dc-label">Pick a Crime (or write your own below)</label>
-    </div>
-    <div class="dc-chip-row" id="dc-chip-row">
-      <button class="dc-chip" data-crime="Ate an entire left shoe while owner was on a work call, left the right shoe completely untouched">👟 Shoe theft</button>
-      <button class="dc-chip" data-crime="Body-slammed the coffee table exactly as the Zoom call went live">💥 Table tackle</button>
-      <button class="dc-chip" data-crime="Stole a rotisserie chicken off the counter in under four seconds, evidence: one greasy paper bag">🍗 Chicken heist</button>
-      <button class="dc-chip" data-crime="Barked at the vacuum cleaner for eleven straight minutes, waking a sleeping baby">😤 Vacuum assault</button>
-      <button class="dc-chip" data-crime="Dug a hole in the newly planted flower bed and buried a single sock in it">🕳️ Sock burial</button>
-      <button class="dc-chip" data-crime="Escaped the yard through a gap no human believed a dog could fit through">🏃 Great escape</button>
-    </div>
-
-    <div class="dc-field">
-      <label class="dc-label">Alleged Crime</label>
-      <textarea class="dc-textarea" id="dc-crime" placeholder="Describe the crime, or tap a chip above"></textarea>
-    </div>
-
-    <button class="dc-file-btn" id="dc-file-btn">
-      <span>⚖️</span> File the Case
-    </button>
-
-    <div class="dc-loading" id="dc-loading">
-      <div class="dc-paws"><span></span><span></span><span></span><span></span></div>
-      <span id="dc-loading-text">Bailiff is summoning the court...</span>
-    </div>
-    <p class="dc-status" id="dc-status"></p>
-
-    <div id="dc-transcript-wrap"></div>
-  </div>
-</div>
-
-<!-- Modal: Past Cases Archive -->
-<div class="dc-modal-overlay" id="dc-archive-modal">
-  <div class="dc-modal">
-    <div class="dc-modal-header">
-      <h2 class="dc-modal-title">📁 Court Docket Archive</h2>
-      <button class="dc-modal-close" id="dc-archive-close">&times;</button>
-    </div>
-    <div class="dc-modal-body" id="dc-archive-list">
-      <p class="dc-empty-msg">No prior cases recorded on this court docket yet.</p>
+      <div id="dc-transcript-wrap"></div>
     </div>
   </div>
-</div>
 
-<!-- Modal: Settings Panel -->
-<div class="dc-modal-overlay" id="dc-settings-modal">
-  <div class="dc-modal">
-    <div class="dc-modal-header">
-      <h2 class="dc-modal-title">⚙️ Courtroom Settings</h2>
-      <button class="dc-modal-close" id="dc-settings-close">&times;</button>
-    </div>
-    <div class="dc-modal-body">
-      <div class="dc-setting-item">
-        <label class="dc-label">Gemini API Key</label>
-        <input class="dc-input" type="password" id="dc-set-gemini-key" placeholder="Type new key to override (or use config.js)..." />
-        <span class="dc-hint" id="dc-gemini-status">Key active</span>
+  <!-- Modal: Past Cases Archive -->
+  <div class="dc-modal-overlay" id="dc-archive-modal">
+    <div class="dc-modal">
+      <div class="dc-modal-header">
+        <h2 class="dc-modal-title">📁 Court Docket Archive</h2>
+        <button class="dc-modal-close" id="dc-archive-close">&times;</button>
       </div>
-      <div class="dc-setting-item">
-        <label class="dc-label">Gemini Preferred Model</label>
-        <select class="dc-select" id="dc-set-gemini-model">
-          <option value="gemini-flash-latest">gemini-flash-latest (Recommended)</option>
-          <option value="gemini-2.0-flash-001">gemini-2.0-flash-001</option>
-          <option value="gemini-2.0-flash">gemini-2.0-flash</option>
-          <option value="gemini-2.5-flash">gemini-2.5-flash</option>
-        </select>
+      <div class="dc-modal-body" id="dc-archive-list">
+        <p class="dc-empty-msg">No prior cases recorded on this court docket yet.</p>
       </div>
-      <div class="dc-setting-item">
-        <label class="dc-label">ElevenLabs Voice API Key (Optional)</label>
-        <input class="dc-input" type="password" id="dc-set-eleven-key" placeholder="Type new key to override (or use config.js)..." />
-        <span class="dc-hint" id="dc-eleven-status">Optional</span>
-      </div>
-      <div class="dc-setting-item dc-checkbox-item">
-        <label class="dc-checkbox-label">
-          <input type="checkbox" id="dc-set-eleven-toggle" />
-          Enable ElevenLabs Premium Voice Acting
-        </label>
-        <span class="dc-hint">Falls back automatically to Web SpeechSynthesis if un-checked or exhausted.</span>
-      </div>
-      <button class="dc-file-btn" id="dc-save-settings-btn" style="margin-top:16px;">💾 Save Settings</button>
     </div>
   </div>
-</div>
 
-<!-- Hidden Canvas for Certificate Generation -->
-<canvas id="dc-cert-canvas" width="1200" height="900" style="display:none;"></canvas>
+  <!-- Modal: Settings Panel -->
+  <div class="dc-modal-overlay" id="dc-settings-modal">
+    <div class="dc-modal">
+      <div class="dc-modal-header">
+        <h2 class="dc-modal-title">⚙️ Courtroom Settings</h2>
+        <button class="dc-modal-close" id="dc-settings-close">&times;</button>
+      </div>
+      <div class="dc-modal-body">
+        <div class="dc-setting-item">
+          <label class="dc-label">Gemini API Key</label>
+          <input class="dc-input" type="password" id="dc-set-gemini-key"
+            placeholder="Type new key to override (or use config.js)..." />
+          <span class="dc-hint" id="dc-gemini-status">Key active</span>
+        </div>
+        <div class="dc-setting-item">
+          <label class="dc-label">Gemini Preferred Model</label>
+          <select class="dc-select" id="dc-set-gemini-model">
+            <option value="gemini-flash-latest">gemini-flash-latest (Recommended)</option>
+            <option value="gemini-2.0-flash-001">gemini-2.0-flash-001</option>
+            <option value="gemini-2.0-flash">gemini-2.0-flash</option>
+            <option value="gemini-2.5-flash">gemini-2.5-flash</option>
+          </select>
+        </div>
+        <div class="dc-setting-item">
+          <label class="dc-label">ElevenLabs Voice API Key (Optional)</label>
+          <input class="dc-input" type="password" id="dc-set-eleven-key"
+            placeholder="Type new key to override (or use config.js)..." />
+          <span class="dc-hint" id="dc-eleven-status">Optional</span>
+        </div>
+        <div class="dc-setting-item dc-checkbox-item">
+          <label class="dc-checkbox-label">
+            <input type="checkbox" id="dc-set-eleven-toggle" />
+            Enable ElevenLabs Premium Voice Acting
+          </label>
+          <span class="dc-hint">Falls back automatically to Web SpeechSynthesis if un-checked or exhausted.</span>
+        </div>
+        <button class="dc-file-btn" id="dc-save-settings-btn" style="margin-top:16px;">💾 Save Settings</button>
+      </div>
+    </div>
+  </div>
 
-<script src="config.js"></script>
-<script src="app.js"></script>
+  <!-- Hidden Canvas for Certificate Generation -->
+  <canvas id="dc-cert-canvas" width="1200" height="900" style="display:none;"></canvas>
 
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+
+</body>
+
+</html>
