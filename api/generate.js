@@ -29,11 +29,8 @@ module.exports = async function handler(req, res) {
 
     // High free-tier quota models ordered by availability (avoiding strict pro quota limits)
     const models = [
-      process.env.GEMINI_MODEL || 'gemini-2.0-flash',
-      'gemini-1.5-flash',
-      'gemini-2.0-flash-lite',
-      'gemini-flash-latest',
-      'gemini-1.5-flash-8b'
+      'gemini-3.1-flash-lite',
+      'gemini-2.5-flash-lite'
     ];
 
     let lastData = null;
