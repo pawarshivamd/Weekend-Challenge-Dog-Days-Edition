@@ -1,4 +1,4 @@
-export default async function handler(req, res) {
+module.exports = async function handler(req, res) {
   // Set CORS headers
   res.setHeader('Access-Control-Allow-Credentials', true);
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -17,29 +17,33 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const apiKey = process.env.GEMINI_API_KEY;
+  const rawKey = process.env.GEMINI_API_KEY || '';
+  const apiKey = rawKey.replace(/["']/g, '').trim();
+
   if (!apiKey || apiKey === 'YOUR_GEMINI_API_KEY_HERE') {
-    return res.status(500).json({ error: 'GEMINI_API_KEY environment variable not configured on Vercel backend.' });
+    return res.status(500).json({ error: 'GEMINI_API_KEY is not configured in Vercel Environment Variables.' });
   }
 
   try {
     const { prompt, systemPrompt } = req.body || {};
 
-    // Fallback model list
     const models = [
       process.env.GEMINI_MODEL || 'gemini-flash-latest',
       'gemini-2.0-flash-001',
       'gemini-2.0-flash',
       'gemini-2.5-flash-lite',
-      'gemini-2.5-flash'
+      'gemini-2.5-flash',
+      'gemini-pro-latest'
     ];
 
     let lastData = null;
     let success = false;
+    let lastErrorMsg = '';
 
     for (const model of models) {
       try {
-        const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent`, {
+        const endpoint = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${encodeURIComponent(apiKey)}`;
+        const response = await fetch(endpoint, {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -54,16 +58,22 @@ export default async function handler(req, res) {
           lastData = await response.json();
           success = true;
           break;
+        } else {
+          const errData = await response.json().catch(() => ({}));
+          const detail = errData.error ? (errData.error.message || JSON.stringify(errData.error)) : response.statusText;
+          lastErrorMsg = `[${response.status} ${model}] ${detail}`;
         }
-      } catch (_) {}
+      } catch (e) {
+        lastErrorMsg = `[Network] ${e.message}`;
+      }
     }
 
     if (success && lastData) {
       return res.status(200).json(lastData);
     } else {
-      return res.status(500).json({ error: 'Gemini API call failed on backend proxy.' });
+      return res.status(500).json({ error: `Gemini API call failed: ${lastErrorMsg || 'Unknown error'}` });
     }
   } catch (err) {
     return res.status(500).json({ error: err.message });
   }
-}
+};
