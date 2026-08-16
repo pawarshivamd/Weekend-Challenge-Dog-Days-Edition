@@ -1014,6 +1014,7 @@ Respond with ONLY valid JSON, no markdown fences, no preamble, matching exactly 
     // First attempt Vercel Serverless Proxy (/api/generate) if client API key is not set
     let proxySuccess = false;
     let proxyData = null;
+    let proxyErrMessage = '';
 
     if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
       try {
@@ -1025,8 +1026,15 @@ Respond with ONLY valid JSON, no markdown fences, no preamble, matching exactly 
         if (proxyResp.ok) {
           proxyData = await proxyResp.json();
           proxySuccess = true;
+        } else {
+          try {
+            const errJson = await proxyResp.json();
+            if (errJson && errJson.error) proxyErrMessage = errJson.error;
+          } catch (_) {}
         }
-      } catch (_) { /* proxy unavailable, check client key */ }
+      } catch (netErr) {
+        console.warn('Vercel proxy unreachable:', netErr);
+      }
     }
 
     if (proxySuccess && proxyData) {
@@ -1048,7 +1056,10 @@ Respond with ONLY valid JSON, no markdown fences, no preamble, matching exactly 
     }
 
     if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
-      alert('Please set your GEMINI_API_KEY in Vercel Environment Variables or in Settings (⚙️) first.');
+      const msg = proxyErrMessage ?
+        `Vercel Proxy Error: ${proxyErrMessage}\n\nPlease add GEMINI_API_KEY in Vercel Environment Variables, or enter key in Settings (⚙️).` :
+        'Please set your GEMINI_API_KEY in Vercel Environment Variables or in Settings (⚙️) first.';
+      alert(msg);
       loadingEl.classList.remove('active');
       fileBtn.disabled = false;
       throw new Error('API key not configured.');
