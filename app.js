@@ -1011,8 +1011,44 @@ Respond with ONLY valid JSON, no markdown fences, no preamble, matching exactly 
     const cfg = window.APP_CONFIG || {};
     const GEMINI_API_KEY = cfg.GEMINI_API_KEY;
 
+    // First attempt Vercel Serverless Proxy (/api/generate) if client API key is not set
+    let proxySuccess = false;
+    let proxyData = null;
+
     if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
-      alert('Please set your GEMINI_API_KEY in config.js or in Settings (⚙️) first.');
+      try {
+        const proxyResp = await fetch('/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ prompt: userPrompt, systemPrompt: systemPrompt })
+        });
+        if (proxyResp.ok) {
+          proxyData = await proxyResp.json();
+          proxySuccess = true;
+        }
+      } catch (_) { /* proxy unavailable, check client key */ }
+    }
+
+    if (proxySuccess && proxyData) {
+      try {
+        const rawText = proxyData.candidates && proxyData.candidates[0] && proxyData.candidates[0].content.parts[0].text;
+        if (rawText) {
+          let cleaned = rawText.trim().replace(/^```json/i, '').replace(/^```/, '').replace(/```$/, '').trim();
+          const parsed = JSON.parse(cleaned);
+          renderCase(parsed, true);
+          return;
+        }
+      } catch (e) {
+        console.error('Error parsing Vercel API proxy data:', e);
+      } finally {
+        clearInterval(loadingInterval);
+        loadingEl.classList.remove('active');
+        fileBtn.disabled = false;
+      }
+    }
+
+    if (!GEMINI_API_KEY || GEMINI_API_KEY === 'YOUR_GEMINI_API_KEY_HERE') {
+      alert('Please set your GEMINI_API_KEY in Vercel Environment Variables or in Settings (⚙️) first.');
       loadingEl.classList.remove('active');
       fileBtn.disabled = false;
       throw new Error('API key not configured.');
